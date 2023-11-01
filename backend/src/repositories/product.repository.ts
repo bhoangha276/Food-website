@@ -16,7 +16,7 @@ class ProductRepository implements IProductRepository {
   save(product: Product): Promise<Product> {
     return new Promise((resolve, reject) => {
       connection.query<OkPacket>(
-        'INSERT INTO tbl_products (name_product, price_product, img_product, category_product) VALUES(?,?,?,?)',
+        'INSERT INTO tbl_products (name, price, img, category) VALUES(?,?,?,?)',
         [product.name, product.price, product.img, product.category],
         (err, res) => {
           if (err) reject(err)
@@ -33,7 +33,7 @@ class ProductRepository implements IProductRepository {
     let query: string = 'SELECT * FROM tbl_products'
     let condition: string = ''
 
-    if (searchParams?.name) condition += `LOWER(name_product) LIKE '%${searchParams.name}%'`
+    if (searchParams?.name) condition += `LOWER(name) LIKE '%${searchParams.name}%'`
 
     if (condition.length) query += ' WHERE ' + condition
 
@@ -61,7 +61,7 @@ class ProductRepository implements IProductRepository {
   update(product: Product): Promise<number> {
     return new Promise((resolve, reject) => {
       connection.query<OkPacket>(
-        'UPDATE tbl_products SET name_product = ?, 	price_product = ?, img_product = ?, category_product = ? WHERE id = ?',
+        'UPDATE tbl_products SET name = ?, 	price = ?, img = ?, category = ? WHERE id = ?',
         [product.name, product.price, product.img, product.category, product.id],
         (err, res) => {
           if (err) reject(err)

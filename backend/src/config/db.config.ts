@@ -2,5 +2,5 @@ export default {
   HOST: 'localhost',
   USER: 'root',
   PASSWORD: '',
-  DB: 'csdl_restaurant',
+  DB: 'db_restaurant',
 }
